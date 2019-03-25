@@ -6,7 +6,7 @@ namespace Isen.DotNet.Library.Lists
 {
     public class MyCollection<T> : System.Collections.Generic.IList<T>
     {
-        private T[] _values;
+        protected T[] _values;
 
         public MyCollection()
         {
@@ -109,7 +109,10 @@ namespace Isen.DotNet.Library.Lists
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            var temp = Count;
+            for(var i=0; i< temp; i++){
+                this.RemoveAt(0);
+            }
         }
 
         public bool Contains(T item) =>
@@ -118,7 +121,13 @@ namespace Isen.DotNet.Library.Lists
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if(array == null) throw new ArgumentNullException();
+            if(arrayIndex <0) throw new ArgumentOutOfRangeException();
+            if(Count + arrayIndex > array.Length) throw new ArgumentException();
+            for(var i=0; i<Count; i++)
+            {
+                array[arrayIndex + i] = this[i];
+            }
         }
 
         public bool Remove(T item)
@@ -132,12 +141,14 @@ namespace Isen.DotNet.Library.Lists
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for(var i=0; i<Count; i++)
+            {
+                yield return this[i];
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator IEnumerable.GetEnumerator() =>            
+            GetEnumerator();
+        
     }
 }

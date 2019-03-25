@@ -133,7 +133,7 @@ namespace Isen.DotNet.Library.Tests
             list.Insert(3, 'D');
             list.Insert(2, 'b');
             var targetArray = new char[] {'A', 'B', 'b', 'C', 'D'};
-            Assert.Equal(targetArray, list.Values);
+            Assert.Equal(targetArray, list);
             try
             {
                 list.Insert(-1, 'E');
@@ -149,6 +149,64 @@ namespace Isen.DotNet.Library.Tests
             catch(Exception e)
             {
                 Assert.True(e is IndexOutOfRangeException);
+            }
+        }
+        [Fact]
+        public void EnumeratorTest()
+        {
+            var list = new MyCollection<char>();
+            list.Add('A');
+            list.Add('B');
+            list.Add('C');
+            list.Add('D');
+
+            var targetArray = new char[] {'A', 'B', 'C', 'D'};
+            foreach(var item in list)
+            {
+                Assert.True(true);
+            }
+        }
+        [Fact]
+        public void ClearTest()
+        {
+            var list = new MyCollection<char>();
+            list.Add('A');
+            list.Add('B');
+            list.Add('C');
+            list.Add('D');
+
+            Assert.True(list.Count == 4);
+            list.Clear();
+            Assert.True(list.Count == 0);
+            
+        }
+
+        [Fact]
+        public void CopyToTest(){
+            var list = new MyCollection<char>();
+            list.Add('A');
+            list.Add('B');
+            list.Add('C');
+
+            var biggerArray = new char[] {'1', '2', 'a', 'b', 'c', 'd'};
+            var biggerExpected = new char[] {'1', '2', 'A', 'B', 'C', 'd'};
+            list.CopyTo(biggerArray, 2);
+            Assert.Equal(biggerArray, biggerExpected);
+
+            var equalArray = new char[]{'1', '2', '3', '4'};
+            var equalExpected = new char[]{'1', 'A', 'B', 'C'};
+            list.CopyTo(equalArray, 1);
+            Assert.Equal(equalArray, equalExpected);
+            
+
+            var smallArray = new char[]{'1', '2', '3'};
+            try
+            {
+                list.CopyTo(smallArray, 2);
+            }
+            catch(Exception e)
+            {
+                Assert.True(e is ArgumentException);
             }
         }
     }

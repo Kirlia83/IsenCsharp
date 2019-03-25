@@ -132,7 +132,7 @@ namespace Isen.DotNet.Library.Tests
             list.Insert(3, "D");
             list.Insert(2, "b");
             var targetArray = new string[] {"A", "B", "b", "C", "D"};
-            Assert.Equal(targetArray, list.Values);
+            Assert.Equal(targetArray, list);
             try
             {
                 list.Insert(-1, "E");
@@ -148,6 +148,22 @@ namespace Isen.DotNet.Library.Tests
             catch(Exception e)
             {
                 Assert.True(e is IndexOutOfRangeException);
+            }
+        }
+
+        [Fact]
+        public void EnumeratorTest()
+        {
+            var list = new MyCollection<string>();
+            list.Add("A");
+            list.Add("B");
+            list.Add("C");
+            list.Add("D");
+
+            var targetArray = new string[] {"A", "B", "C", "D"};
+            foreach(var item in list)
+            {
+                Assert.True(true);
             }
         }
     }
