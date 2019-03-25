@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isen.DotNet.ConsoleApp", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isen.DotNet.Library", "src\Isen.Dotnet.Library\Isen.DotNet.Library.csproj", "{7A7278A0-FB5E-4389-B5A6-CDA8C003B047}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1E2EEDBF-B533-4AD8-9896-9009EAE6C92F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isen.DotNet.Library.Tests", "tests\Isen.DotNet.Library.Tests\Isen.DotNet.Library.Tests.csproj", "{49A616FE-8B17-4925-ADB3-1DB70D08360C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +50,22 @@ Global
 		{7A7278A0-FB5E-4389-B5A6-CDA8C003B047}.Release|x64.Build.0 = Release|Any CPU
 		{7A7278A0-FB5E-4389-B5A6-CDA8C003B047}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A7278A0-FB5E-4389-B5A6-CDA8C003B047}.Release|x86.Build.0 = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|x64.Build.0 = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Debug|x86.Build.0 = Debug|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|x64.ActiveCfg = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|x64.Build.0 = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|x86.ActiveCfg = Release|Any CPU
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{60A60705-9D5A-4A63-B7F7-7FEE3397B2B3} = {4A427022-B7F2-4811-8945-DAD51385518F}
 		{7A7278A0-FB5E-4389-B5A6-CDA8C003B047} = {4A427022-B7F2-4811-8945-DAD51385518F}
+		{49A616FE-8B17-4925-ADB3-1DB70D08360C} = {1E2EEDBF-B533-4AD8-9896-9009EAE6C92F}
 	EndGlobalSection
 EndGlobal
