@@ -1,25 +1,29 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Isen.DotNet.Library.Lists
 {
-    public class MyCollection
+    public class MyCollection<T> : System.Collections.Generic.IList<T>
     {
-        private string[] _values;
+        private T[] _values;
 
         public MyCollection()
         {
-            _values = new string[0];
+            _values = new T[0];
         }
         /// <summary>
         ///Taille de la liste
         ///</summary>
         public int Count => _values.Length;
-        public string[] Values => _values;
+        public T[] Values => _values;
+
+        public bool IsReadOnly => throw new NotImplementedException();
 
         /// <summary>
         ///Accesseur indexeur
         ///</summary>
-        public string this[int index]
+        public T this[int index]
         {
             get{return _values[index]; }
             set{_values[index] = value; }
@@ -29,10 +33,10 @@ namespace Isen.DotNet.Library.Lists
         ///Ajoute un élément à la fin de la liste
         ///</summary>
         ///<param name="item"></param>
-        public void Add(string item)
+        public void Add(T item)
         {
             //Nouveau tableau
-            var temp = new string[Count + 1];
+            var temp = new T[Count + 1];
             //Copier les elements du tableau initial
             for(var i = 0; i< Count; i++)
             {
@@ -51,7 +55,7 @@ namespace Isen.DotNet.Library.Lists
                 throw new IndexOutOfRangeException();
             }
             //Nouveau tableau
-            var temp = new string[Count - 1];
+            var temp = new T[Count - 1];
             
             //Copier les elements du tableau initial
             for(var i = 0; i< Count - 1; i++)
@@ -67,6 +71,73 @@ namespace Isen.DotNet.Library.Lists
             }
             //Echanger les tableaux
             _values = temp;
+        }
+
+        public int IndexOf(T item)
+        {
+            var index = -1;
+            for(var i=0; i<Count; i++)
+            {
+                if(this[i].Equals(item))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        public void Insert(int index, T item)
+        {
+            if(index > Count || index < 0){
+                throw new IndexOutOfRangeException();
+            }
+            var temp = new T[Count + 1];
+            for(var i=0; i<temp.Length; i++){
+                if(i<index){
+                    temp[i]=_values[i];
+                }
+                else if(i == index){
+                    temp[i] = item;
+                }
+                else if(i > index){
+                    temp[i] = _values[i-1];
+                }
+            }
+            _values = temp;
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(T item) =>
+            IndexOf(item) >= 0;
+        
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(T item)
+        {
+            var index = IndexOf(item);
+            if(index < 0)return false;
+
+            RemoveAt(index);
+            return true;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

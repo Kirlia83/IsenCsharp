@@ -45,3 +45,16 @@ Supprimer la classe autogénérée (ClassC1)
 * Référencer le projet Library dans le projet de test : `dotnet add reference ../../src/Isen.DotNet.Library`
 * Renommer la classe générée automatiquement dans le projet de test et l'appeler 'MyCollectionTests'
 * Coder un test de la méthode Add
+* Executer les test
+* Coder les accesseurs indexeurs
+* Coder les tests de Count et Index
+
+#Refractoring de la class MyCollection en générique
+* Réécriture de la classe MyCollection qui devient générique
+* Modification de MyCollection en MyCollection<string>()
+* Renommer MyCollectionTest.cs en MyCollectionStringTest.cs et renommer la classe de la même façon.
+* Duppliquer MyCollectionStringTest en MyCollectionCharTest et adapter le code de test en conséquence
+
+#Implémentation de l'interface IList<T>
+* Indiquer l'implémentation de l'héritage
+Utilise l'ampoule Omnnisharp pour générer le using manquant
