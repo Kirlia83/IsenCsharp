@@ -58,3 +58,13 @@ Supprimer la classe autogénérée (ClassC1)
 #Implémentation de l'interface IList<T>
 * Indiquer l'implémentation de l'héritage
 Utilise l'ampoule Omnnisharp pour générer le using manquant
+
+#Modele City
+Créer dans Models une class City avec Id Name ZipCode.
+Dans person ajouter champ BornIn de type City
+
+#Refactoring
+Deplacer Id et Name vers une class de base abstraite : 'BaseModel'.
+
+Faire dériver City et Person de BaseModel.
+Noter les champs Id et Name comme des override de BaseModel
