@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Tous les contrats";
+}
+
+@using Isen.DotNet.Library.Models
+@model IEnumerable<Contract>
+
+<h1>Tous les contrats</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Joueuse</th>
+      <th scope="col">Club</th>
+      <th scope="col">Date de début</th>
+      <th scope="col">Date de fin</th>
+      <th>Action...</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var contrat in Model)
+      {
+        var dateBeginString = contrat.BeginDate.HasValue? contrat.BeginDate.Value.ToString("yyyy") : "";
+        var dateEndString = contrat.EndDate.HasValue? contrat.EndDate.Value.ToString("yyyy") : "en cours";
+        <tr>
+            <th scope="row">@contrat.Id</th>
+            <th scope="row">@contrat.PlayerContract.Name</th>
+            <th scope="row">@contrat.ClubContract.Name</th>
+            <td>@dateBeginString</td>
+            <td>@dateEndString</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="Contract" asp-action="Edit" asp-route-id="@contrat.Id">Modifier</a>
+                <a class="btn btn-outline-danger" class="btn btn-outline-primary" asp-controller="Contract" asp-action="Delete" asp-route-id="@contrat.Id">Supprimer</a>
+            </td>
+        </tr>
+      }
+  </tbody>
+</table>

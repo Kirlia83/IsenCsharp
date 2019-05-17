@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Toutes les joueuses";
+}
+
+@using Isen.DotNet.Library.Models
+@model IEnumerable<Player>
+@using Isen.DotNet.Library.Repositories.Interfaces;
+@inject IContractRepository _contractRepository
+
+<h1>Toutes les personnes</h1>
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Date de naissance</th>
+          <th scope="col">Age</th>
+          <th scope="col">Historique</th>
+          <th>Action...</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach(var player in Model)
+      {
+          var dateString = player.DateOfBirth.HasValue? player.DateOfBirth.Value.ToShortDateString() : "";
+      <tr>
+          <th scope="row">@player.Id</th>
+          <td>@player.LastName</td>
+          <td>@player.FirstName</td>
+          <td>@dateString</td>
+          <td>@player.Age ans</td>
+          <td>
+          @foreach(var contract in _contractRepository.Find(p => p.PlayerId.Equals(@player.Id)))
+          {
+              <li><img src="~/images/@contract.ClubContract.Logo" alt="@contract.ClubContract.Name logo" asp-append-version="true" Width="20" Height="20"/> @contract.DisplayForPlayer()</li>
+                
+          }
+          </td>
+          <td>
+              <a class="btn btn-outline-primary" asp-controller="Player" asp-action="Edit" asp-route-id="@player.Id">Modifier</a>
+              <a class="btn btn-outline-danger" class="btn btn-outline-primary" asp-controller="Player" asp-action="Delete" asp-route-id="@player.Id">Supprimer</a>
+          </td>
+      </tr>
+      }
+  </tbody>
+</table>

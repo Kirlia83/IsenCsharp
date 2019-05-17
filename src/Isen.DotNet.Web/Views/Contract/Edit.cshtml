@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Edition d'un contrat";
+}
+@using Isen.DotNet.Library.Models
+@model Contract
+@using Isen.DotNet.Library.Repositories.Interfaces;
+@inject IPlayerRepository _playerRepository
+@inject IClubRepository _clubRepository
+
+<h1>Edition d'un contrat (formulaire)</h1>
+
+<div class="row">
+    <div class="col-12">
+
+        <form class="form-group" asp-action="Edit">
+
+            <input type="hidden" asp-for="Id" value="@Model?.Id"/>
+
+            <div class="form-group">
+                <label for="PlayerContract">Joueuse</label>
+                @Html.DropDownListFor(
+                    //Quel champ du modèle (Contract) est concerné
+                    c => c.PlayerId,
+                    //Création d'une liste
+                    new SelectList(
+                        //Données de la liste
+                        _playerRepository.GetAll(),
+                        //champ de l'id
+                        "Id",
+                        //Texte affiché
+                        "Name"),
+                        //Par défaut
+                        "Sélectionner une joueuse...",
+                        //Classe CSS
+                        new { @class = "form-control" }
+                    )
+            </div>
+            <div class="form-group">
+                <label for="ClubContract">Club</label>
+                @Html.DropDownListFor(
+                    c => c.ClubId,
+                    new SelectList(
+                        _clubRepository.GetAll(),
+                        "Id",
+                        "Name"),
+                        "Sélectionner un club...",
+                        new { @class = "form-control" }
+                    )
+            </div>
+            
+            <div class="form-group">
+                @{
+                    var beginDateString = Model?.BeginDate
+                        .GetValueOrDefault(DateTime.MinValue)
+                        .ToString("dd/MM/yyyy");
+                }
+                <label for="BeginDate">Date de début</label>
+                <input id="BeginDate" type="text" class="form-control" placeholder="Date de début" asp-for="BeginDate" value="@beginDateString">
+            </div>
+            
+            <div class="form-group">
+                @{
+                    var endDateString = Model?.EndDate
+                        .GetValueOrDefault(DateTime.MinValue)
+                        .ToString("dd/MM/yyyy");
+                }
+                <label for="EndDate">Date de fin</label>
+                <input id="EndDate" type="text" class="form-control" placeholder="Date de fin" asp-for="EndDate" value="@endDateString">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Valider</button>
+            <a class="btn btn-secondary" asp-controller="Contract" asp-action="Index">Annuler</a>
+        </form>
+    </div>
+</div>
