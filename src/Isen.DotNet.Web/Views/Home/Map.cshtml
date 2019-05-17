@@ -29,7 +29,7 @@
 			var macarte = null;
 
 
-            var clubs = JSON.parse(@clubs);
+            //var clubs = JSON.parse(@clubs);
             
 			function initMap() {
 				// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
@@ -42,9 +42,9 @@
                     maxZoom: 20
                 }).addTo(macarte);
                 
-                for (club in clubs) {
-                    var marker = L.marker([clubs[club].Latitude, clubs[club].Longitude]).addTo(macarte);
-                } 
+                /*for (club in clubs) {
+                    //var marker = L.marker([clubs[club].Latitude, clubs[club].Longitude]).addTo(macarte);
+                } */
             }
 			window.onload = function(){
 				// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
