@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Isen.DotNet.Library.Models
 {
-    public class Person : BaseModel<Person>
+    public class Player : BaseModel<Player>
     {
         public override int Id { get;set; }
         [NotMapped]
@@ -19,9 +20,10 @@ namespace Isen.DotNet.Library.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public City BornIn { get;set; }
-        //Clé étrangère du champ BornIn
-        public int? BornInId {get; set;}
+
+        public List<Contract> Historic { get; set; }=
+            new List<Contract>();
+
         [NotMapped]
         public int? Age
         {
@@ -44,18 +46,18 @@ namespace Isen.DotNet.Library.Models
                 var sAge = Age.HasValue ?
                     Age.ToString() : 
                     "undef";
-                var display = $"{base.Display}|Age={sAge}|City={BornIn}";
+                var display = $"{base.Display}|Age={sAge}";
                 return display;
             }
         }
 
-        public override void Map(Person copy)
+        public override void Map(Player copy)
         {
             base.Map(copy);
             FirstName = copy.FirstName;
             LastName = copy.LastName;
             DateOfBirth = copy.DateOfBirth;
-            BornIn = copy.BornIn;
+            Historic = copy.Historic;
         }
 
         public override dynamic ToDynamic()
@@ -65,7 +67,6 @@ namespace Isen.DotNet.Library.Models
             baseDynamic.last = LastName;
             baseDynamic.date = DateOfBirth;
             baseDynamic.age = Age;
-            baseDynamic.bornIn = BornIn?.ToDynamic();
             return baseDynamic;
         }
     }
